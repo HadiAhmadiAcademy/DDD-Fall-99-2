@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Storm.Framework.core" Version="1.0.1" />
+    <PackageReference Include="Storm.Framework.Domain" Version="1.0.1" />
+  </ItemGroup>
+
+</Project>
