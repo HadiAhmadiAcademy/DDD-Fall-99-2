@@ -4,6 +4,7 @@ namespace LoanApplications.Domain.Model.LoanApplications.States
 {
     public abstract class LoanApplicationState
     {
+        internal LoanApplicationState() { }
         public static LoanApplicationState InitialState()
         {
             return StatePool.GetState<PendingState>();

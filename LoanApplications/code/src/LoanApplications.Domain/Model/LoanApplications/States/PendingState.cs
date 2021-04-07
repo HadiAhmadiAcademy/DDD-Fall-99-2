@@ -2,6 +2,8 @@
 {
     public class PendingState : LoanApplicationState
     {
+        internal PendingState() { }
+
         public override LoanApplicationState Confirm()
         {
             return StatePool.GetState<ConfirmedState>();

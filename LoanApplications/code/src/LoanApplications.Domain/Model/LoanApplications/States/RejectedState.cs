@@ -2,6 +2,6 @@
 {
     public class RejectedState : LoanApplicationState
     {
-
+        internal RejectedState() { }
     }
 }

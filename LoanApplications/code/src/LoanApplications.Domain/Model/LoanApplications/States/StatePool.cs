@@ -15,7 +15,12 @@ namespace LoanApplications.Domain.Model.LoanApplications.States
         };
         public static T GetState<T>() where T : LoanApplicationState
         {
-            return _states[typeof(T).Name] as T;
+            return GetState(typeof(T)) as T;
+        }
+
+        public static LoanApplicationState GetState(Type type)
+        {
+            return _states[type.Name] as LoanApplicationState;
         }
     }
 }
