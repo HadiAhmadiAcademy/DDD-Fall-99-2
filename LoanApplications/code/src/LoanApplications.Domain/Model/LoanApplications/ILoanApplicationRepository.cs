@@ -1,10 +1,11 @@
-﻿using Framework.Domain;
+﻿using System.Threading.Tasks;
+using Framework.Domain;
 
 namespace LoanApplications.Domain.Model.LoanApplications
 {
     public interface ILoanApplicationRepository : IRepository
     {
-        LoanApplication Get(long id);
+        Task<LoanApplication> Get(long id);
         void Add(LoanApplication loanApplication);
     }
 }
