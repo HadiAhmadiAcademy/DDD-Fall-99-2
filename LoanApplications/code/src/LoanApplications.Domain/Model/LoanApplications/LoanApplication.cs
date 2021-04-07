@@ -12,13 +12,15 @@ namespace LoanApplications.Domain.Model.LoanApplications
         public long ApplicantId { get; private set; }
         public long LoanAmount { get; private set; }
         public TimeSpan PaybackPeriod { get; private set; }
-        //public double InterestRate { get; set; }
+        public InterestRate InterestRate { get; private set; }
         public LoanApplicationState State { get; private set; }
-        public LoanApplication(long id, long applicantId, long loanAmount, TimeSpan paybackPeriod) : base(id)
+        public LoanApplication(long id, long applicantId, long loanAmount, TimeSpan paybackPeriod, InterestRate interestRate) 
+            : base(id)
         {
             ApplicantId = applicantId;
             LoanAmount = loanAmount;
             PaybackPeriod = paybackPeriod;
+            InterestRate = interestRate;
             State = LoanApplicationState.InitialState();
         }
         public void Update(long loanAmount, TimeSpan paybackPeriod)

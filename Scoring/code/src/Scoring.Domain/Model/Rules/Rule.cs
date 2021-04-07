@@ -46,6 +46,5 @@ namespace Scoring.Domain.Model.Rules
 
             return CalculationMethod.Calculate();
         }
-
     }
 }

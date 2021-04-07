@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Framework.Application;
 using LoanApplications.Application.Contracts.LoanApplications;
 using LoanApplications.Domain.Model.LoanApplications;
+using LoanApplications.Domain.Services;
 
 namespace LoanApplications.Application
 {
@@ -13,17 +14,20 @@ namespace LoanApplications.Application
                                             ICommandHandler<CancelLoanApplication>
     {
         private readonly ILoanApplicationRepository _repository;
-        public LoanApplicationHandlers(ILoanApplicationRepository repository)
+        private readonly IInterestRateCalculator _interestRateCalculator;
+        public LoanApplicationHandlers(ILoanApplicationRepository repository, IInterestRateCalculator interestRateCalculator)
         {
             _repository = repository;
+            _interestRateCalculator = interestRateCalculator;
         }
 
-        public  Task Handle(PlaceLoanApplication command)
+        public async Task Handle(PlaceLoanApplication command)
         {
             var paybackPeriod = TimeSpan.FromDays(command.PaybackPeriodDays);
-            var loanApplication = new LoanApplication(0, command.ApplicantId, command.LoanAmount, paybackPeriod);
+            var interestRate = await _interestRateCalculator.CalculateInterestRateForApplicant(command.ApplicantId);
+            var id = await _repository.NextId();
+            var loanApplication = new LoanApplication(id, command.ApplicantId, command.LoanAmount, paybackPeriod, interestRate);
             _repository.Add(loanApplication);
-            return Task.CompletedTask;
         }
 
         public async Task Handle(RejectLoanApplication command)
